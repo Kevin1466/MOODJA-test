@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/mvc
+       http://www.springframework.org/schema/mvc/spring-mvc.xsd
+       http://www.springframework.org/schema/data/jpa
+       http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:component-scan base-package="controller"/>
+    <context:component-scan base-package="service"/>
+
+    <mvc:default-servlet-handler/>
+    <mvc:resources location="/static/" mapping="static/**" />
+
+    <jpa:repositories base-package="repository"/>
+
+
+    <mvc:annotation-driven/>
+
+    <mvc:resources mapping="css/**" location="static/css/"/>
+    <mvc:resources mapping="js/**" location="static/js/"/>
+    <mvc:resources mapping="img/**" location="static/img/"/>
+
+    <bean id="jspViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+        <property name="prefix" value="/WEB-INF/view/"/>
+        <property name="suffix" value=".jsp"/>
+    </bean>
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="defaultPersistenceUnit"/>
+    </bean>
+    <jpa:repositories base-package="repository"/>
+
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+
+    <bean id="javaMailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+        <property name="host" value="smtp.gmail.com"/>
+        <property name="username" value="eric.wang@moodja.com"/>
+        <property name="password" value="Phantom0518eric"/>
+        <property name="port" value="465"/>
+        <property name="javaMailProperties">
+            <props>
+                <prop key="mail.smtp.auth">true</prop>
+                <prop key="mail.smtp.timeout">25000</prop>
+                <prop key="mail.smtp.starttls.enable">true</prop>
+                <prop key="mail.smtp.EnableSSL.enable">true</prop>
+                <prop key="mail.smtp.socketFactory.class">javax.net.ssl.SSLSocketFactory</prop>
+                <prop key="mail.smtp.socketFactory.fallback">false</prop>
+                <prop key="mail.smtp.socketFactory.port">465</prop>
+            </props>
+        </property>
+    </bean>
+
+    <!--Config threads pool-->
+    <bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+        <!-- number of core threads -->
+        <property name="corePoolSize" value="10" />
+        <!-- maximum thread -->
+        <property name="maxPoolSize" value="100" />
+        <!-- maximum lines -->
+        <property name="queueCapacity" value="500" />
+        <!-- allowed free time of threads pool -->
+        <property name="keepAliveSeconds" value="60" />
+    </bean>
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+</beans>

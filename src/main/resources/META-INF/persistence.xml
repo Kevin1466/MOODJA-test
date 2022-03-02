@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+    <persistence-unit name="defaultPersistenceUnit" transaction-type="RESOURCE_LOCAL">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL8Dialect"/>
+
+            <!-- URL for database connection -->
+            <property name="hibernate.connection.url" value="jdbc:mysql://db-mysql-fra1-07133-do-user-9073766-0.b.db.ondigitalocean.com:25060/MOODJA"/>
+            
+            <!-- Driver for database connection -->
+            <property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver"/>
+
+            <!-- Username for database connection -->
+            <property name="hibernate.connection.username" value="doadmin"/>
+
+            <!-- Password for database connection -->
+            <property name="hibernate.connection.password" value="QbLFvoB1t8KWSZ44"/>
+
+            <!-- Show SQL -->
+            <property name="hibernate.show_sql" value="true"/>
+
+            <property name="hibernate.connection.useUnicode" value="true"/>
+            <property name="hibernate.connection.characterEncoding" value="UTF-8"/>
+            <property name="initialPoolSize" value="10"/>
+
+            <!-- Maximum connections -->
+            <property name="hibernate.c3p0.max_size" value="30"/>
+
+            <!-- Minimum connections -->
+            <property name="hibernate.c3p0.min_size" value="10"/>
+
+            <!-- Maximum free time, in 600 seconds(10 minutes), if not in use then connection will be abandoned, if value=0 then never. Default: 0 -->
+            <property name="hibernate.c3p0.timeout" value="600"/>
+
+            <!-- c3p0 collect the connects when the connection pool is empty. Default: 3 -->
+            <property name="hibernate.c3p0.acquire_increment" value="3"/>
+
+            <!-- Check the free connection in the pool every 60 seconds. Default: 0 -->
+            <property name="hibernate.c3p0.idle_test_period" value="60"/>
+
+            <!-- Display Formatted SQL scripts -->
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hibernate.use_sql_comments" value="false"/>
+
+            <!-- Database will reconnection when timeout -->
+            <property name="hibernate.connection.autoReconnect" value="true"/>
+            <property name="connection.autoReconnectForPools" value="true"/>
+            <property name="connection.is-connection-validation-required" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>

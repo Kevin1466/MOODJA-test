@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="33c97e1c-f387-4324-9745-2aced23a4b3d" name="MOODJA" url="https://moodja.internal.com">
+        <fileTransfer rootFolder="/root" accessType="SFTP" host="157.230.122.241" port="22" sshConfigId="b01d881b-aebe-419c-98b4-f45c8005453f" sshConfig="root@157.230.122.241:22 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
